@@ -1,0 +1,6 @@
+﻿{
+  "projectRoot": "../../Wr.UmbFormsBrontoWorkflow",
+  "dlls": [ "/bin/Wr.UmbFormsBrontoWorkflow.dll" ],
+  "packageXmlTemplate": "package.xml",
+  "includeFoldersOrFiles": [ "/App_Plugins/UmbFormsBrontoWorkflow" ]
+}

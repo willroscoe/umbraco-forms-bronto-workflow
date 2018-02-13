@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>package.manifest</guid>
+      <orgPath>/App_Plugins/UmbFormsBrontoWorkflow</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>Wr.UmbFormsBrontoWorkflow.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Wr.UmbFormsBrontoWorkflow.dll</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>Bronto Workflow - Umbraco Forms</name>
+      <version>1.0.0</version>
+      <iconUrl>https://raw.githubusercontent.com/willroscoe/umbraco-forms-bronto-workflow/master/assets/bronto-workflow_icon64.png</iconUrl>
+      <license url="http://opensource.org/licenses/MIT">MIT License</license>
+      <url>https://github.com/willroscoe/umbraco-forms-bronto-workflow</url>
+      <requirements>
+        <major>7</major>
+        <minor>6</minor>
+        <patch>0</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>Will Roscoe</name>
+      <website>https://github.com/willroscoe/umbraco-forms-bronto-workflow</website>
+    </author>
+    <readme>
+      <![CDATA[A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto contact and associated list, using the Bronto SOAP Api.]]>
+    </readme>
+  </info>
+  <DocumentTypes />
+  <Templates />
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes />
+</umbPackage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>UmbracoFormsBrontoWorkflow</id>
+    <version>$version$</version>
+    <title>A Bronto workflow for Umbraco Forms</title>
+    <authors>Will Roscoe</authors>
+    <owners>Will Roscoe</owners>
+    <licenseUrl>https://github.com/willroscoe/umbraco-forms-bronto-workflow/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/willroscoe/umbraco-forms-bronto-workflow</projectUrl>
+    <iconUrl>https://github.com/willroscoe/umbraco-forms-bronto-workflow/raw/master/assets/bronto-workflow_icon64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto contact and associated list, using the Bronto SOAP Api.</description>
+    <tags>Umbraco Forms Bronto Workflow</tags>
+    <dependencies>
+      <dependency id="UmbracoForms.Core" version="6.0.6" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Wr.UmbFormsBrontoWorkflow.BrontoApi;
 
@@ -67,7 +66,6 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
 
             foreach (var item in result)
             {
-                Console.WriteLine("List found: " + item.name);
                 if (knownList.Contains(item.name))
                 {
                     knownList.Remove(item.name);
@@ -111,7 +109,6 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
 
             foreach (var item in result)
             {
-                Console.WriteLine("Field found: " + item.name);
                 if (knownFields.Contains(item.name))
                 {
                     knownFields.Remove(item.name);
@@ -123,8 +120,9 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
         }
 
         [Test]
-        public void BrontoClient_AddContactTest_NoContact_ReturnsFailed()
+        public void Fail_Build_In_Development()
         {
+            // Assert
             Assert.Fail();
         }
     }

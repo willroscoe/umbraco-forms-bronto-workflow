@@ -55,6 +55,10 @@ build:
   include_nuget_references: false
   verbosity: minimal
 
+after_build:
+- ps: >-
+    build\tools\UmbracoTools\Wr.UmbracoTools.Packager.exe -set build\umbraco\package_settings.json -out "..\bronto-workflow-umbraco-forms{version}.zip" -ver ${env:APPVEYOR_BUILD_VERSION}
+
 test:
   assemblies:
     only:

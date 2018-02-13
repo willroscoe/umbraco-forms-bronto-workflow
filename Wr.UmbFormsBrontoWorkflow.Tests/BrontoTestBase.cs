@@ -42,7 +42,6 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
         {
             foreach (var item in paths)
             {
-                Console.WriteLine("TEST Path: " + item);
                 if (File.Exists(item))
                 {
                     return item;

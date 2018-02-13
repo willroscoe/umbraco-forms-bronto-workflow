@@ -255,6 +255,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\UmbFormsBrontoWorkflow\package.manifest" />
     <None Include="Connected Services\BrontoSoapService\BrontoSoapApiImplService.wsdl" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -263,6 +264,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Wr.UmbFormsBrontoWorkflow.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\BrontoSoapService\configuration91.svcinfo" />

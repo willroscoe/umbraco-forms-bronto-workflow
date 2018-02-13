@@ -54,7 +54,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="UmbFormsBrontoApiToken.txt.enc" />
+    <None Include="BrontoSoapTestApiToken.txt.enc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wr.UmbFormsBrontoWorkflow\Wr.UmbFormsBrontoWorkflow.csproj">
