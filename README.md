@@ -1,7 +1,8 @@
 # Bronto workflow for Umbraco Forms - IN DEVELOPMENT
 A custom workflow to allow users to save a new marketing contact via Umbraco Forms, to a Bronto contact and associated list, using the Bronto SOAP Api.
 
-![Development status: Alpha](https://img.shields.io/badge/development-alpha-red.svg "Development status: Alpha")
+[![Build status](https://ci.appveyor.com/api/projects/status/sbbekv4d73eghk2c?svg=true)](https://ci.appveyor.com/project/willroscoe/umbraco-forms-bronto-workflow)
+[![Development status: Alpha](https://img.shields.io/badge/development-alpha-red.svg "Development status: Alpha")]
 
 
 ## Live Configuration:

@@ -65,7 +65,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             // Act
             var result = bronto.GetLists();
 
-            foreach(var item in result)
+            foreach (var item in result)
             {
                 Console.WriteLine("List found: " + item.name);
                 if (knownList.Contains(item.name))
@@ -122,5 +122,10 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             Assert.IsTrue(knownFields.Count == 0);
         }
 
+        [Test]
+        public void BrontoClient_AddContactTest_NoContact_ReturnsFailed()
+        {
+            Assert.Fail();
+        }
     }
 }
