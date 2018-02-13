@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using Umbraco.Forms.Core;
 using Umbraco.Forms.Core.Enums;
 using Wr.UmbFormsBrontoWorkflow.BrontoApi;
@@ -22,7 +19,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Workflows
         public override WorkflowExecutionStatus Execute(Record record, RecordEventArgs e)
         {
             // bronto login
-            var bronto = new BrontoSoapClient(BrontoAppSettings.ApiToken);
+            var bronto = new BrontoSoapClient(BrontoAppSettings.SoapApiToken);
 
             var contact = ParseFormToBronto.Contact(record);
 
@@ -38,19 +35,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Workflows
         public override List<Exception> ValidateSettings()
         {
             List<Exception> exceptionList = new List<Exception>();
-            /*if (string.IsNullOrEmpty(CookieName))
-                exceptionList.Add(new Exception("’CookieName’ setting has not been set"));
-
-            if (string.IsNullOrEmpty(CookieExpiryInDays))
-                exceptionList.Add(new Exception("’CookieExpiryInDays’ setting has not been set’"));
-
-            double expiryDays;
-            if (!double.TryParse(CookieExpiryInDays, out expiryDays))
-                exceptionList.Add(new Exception("’CookieExpiryInDays’ is not a valid day count’"));
-
-            if (string.IsNullOrEmpty(OwnerEmail))
-                exceptionList.Add(new Exception("'Owner Email has not been set'"));
-                */
+            
             return exceptionList;
         }
     }

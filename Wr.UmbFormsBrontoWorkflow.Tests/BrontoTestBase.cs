@@ -17,22 +17,22 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
         {
             get
             {
-                const string brontoApiTokenfile = "UmbFormsBrontoApiToken.txt";
+                const string brontoSoapApiTokenfile = "BrontoSoapTestApiToken.txt";
 
                 if (string.IsNullOrEmpty(_ApiToken))
                 {
                     string fullpath = GetApiTokenFilePath(new string[]
                     {
-                        Path.Combine(VirtualPathUtility.ToAppRelative("~"), brontoApiTokenfile),
-                        Path.Combine(Environment.CurrentDirectory, brontoApiTokenfile),
-                        Path.Combine(Assembly.GetExecutingAssembly().Location, brontoApiTokenfile),
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dev/Umb/SafeFolder/" + brontoApiTokenfile),
-                        Path.Combine(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()),brontoApiTokenfile)
+                        Path.Combine(VirtualPathUtility.ToAppRelative("~"), brontoSoapApiTokenfile),
+                        Path.Combine(Environment.CurrentDirectory, brontoSoapApiTokenfile),
+                        Path.Combine(Assembly.GetExecutingAssembly().Location, brontoSoapApiTokenfile),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dev/Umb/SafeFolder/" + brontoSoapApiTokenfile), // local path to txt file with a test Soap Api Token. This should be outside of the project root and so not included in source control
+                        Path.Combine(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()),brontoSoapApiTokenfile)
                     });
 
                     if (string.IsNullOrEmpty(fullpath))
                     {
-                        throw new FileNotFoundException("Could not locate a file with the bronto Api Token", brontoApiTokenfile);
+                        throw new FileNotFoundException("Could not locate a file with the bronto Api Token", brontoSoapApiTokenfile);
                     }
                     _ApiToken = File.ReadAllText(fullpath);
                 }

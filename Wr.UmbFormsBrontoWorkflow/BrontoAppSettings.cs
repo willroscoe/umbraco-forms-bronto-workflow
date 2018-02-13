@@ -4,9 +4,7 @@ namespace Wr.UmbFormsBrontoWorkflow
 {
     internal static class BrontoAppSettings
     {
-        public static string ApiToken { get { return GetConfigSetting("umbFormBrontoApiToken"); } }
-
-        public static string AccountCode { get { return GetConfigSetting("umbFormBrontoAccountCode"); ; } }
+        public static string SoapApiToken { get { return GetConfigSetting("umbFormsBrontoSoapApiToken"); } }
 
         private static string GetConfigSetting(string settingName)
         {

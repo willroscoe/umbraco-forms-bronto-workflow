@@ -45,7 +45,7 @@ cache:
 
 install:
   - nuget install secure-file -ExcludeVersion
-  - secure-file\tools\secure-file -decrypt Wr.UmbFormsBrontoWorkflow.Tests\UmbFormsBrontoApiToken.txt.enc -secret %test_token_secret% # decrypt test bronto api token file
+  - secure-file\tools\secure-file -decrypt Wr.UmbFormsBrontoWorkflow.Tests\BrontoSoapTestApiToken.txt.enc -secret %test_token_secret% # decrypt test bronto api token file
 
 before_build:
 - cmd: nuget restore Wr.UmbFormsBrontoWorkflow.sln
