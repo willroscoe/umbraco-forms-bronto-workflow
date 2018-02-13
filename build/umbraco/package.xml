@@ -7,6 +7,21 @@
       <orgName>package.manifest</orgName>
     </file>
     <file>
+      <guid>lists.editor.controller.js</guid>
+      <orgPath>/App_Plugins/UmbFormsBrontoWorkflow</orgPath>
+      <orgName>lists.editor.controller.js</orgName>
+    </file>
+    <file>
+      <guid>lists.editor.html</guid>
+      <orgPath>/App_Plugins/UmbFormsBrontoWorkflow</orgPath>
+      <orgName>lists.editor.html</orgName>
+    </file>
+    <file>
+      <guid>lists.editor.resources.js</guid>
+      <orgPath>/App_Plugins/UmbFormsBrontoWorkflow</orgPath>
+      <orgName>lists.editor.resources.js</orgName>
+    </file>
+    <file>
       <guid>Wr.UmbFormsBrontoWorkflow.dll</guid>
       <orgPath>/bin</orgPath>
       <orgName>Wr.UmbFormsBrontoWorkflow.dll</orgName>

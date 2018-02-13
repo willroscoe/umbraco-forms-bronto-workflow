@@ -7,7 +7,6 @@ branches:
   # whitelist
   only:
     - master
-    - develop
 
 # Do not build on tags (GitHub and BitBucket)
 skip_tags: true
@@ -51,18 +50,38 @@ before_build:
 - cmd: nuget restore Wr.UmbFormsBrontoWorkflow.sln
 
 build:
-  publish_nuget: false
-  include_nuget_references: false
+  publish_nuget: true
+  include_nuget_references: true
   verbosity: minimal
 
 after_build:
 - ps: >-
-    build\tools\UmbracoTools\Wr.UmbracoTools.Packager.exe -set build\umbraco\package_settings.json -out "..\bronto-workflow-umbraco-forms{version}.zip" -ver ${env:APPVEYOR_BUILD_VERSION}
+    build\tools\UmbracoTools\Wr.UmbracoTools.Packager.exe -set build\umbraco\package_settings.json -out "..\brontoworkflow-umbracoforms{version}.zip" -ver ${env:APPVEYOR_BUILD_VERSION}
 
 test:
   assemblies:
     only:
     - Wr.UmbFormsBrontoWorkflow.Tests.dll
+
+artifacts:
+- path: brontoworkflow*.zip
+  name: umbraco package
+
+deploy:
+   # GitHub Deployment for releases
+  - provider: GitHub
+    repository: willroscoe/umbraco-forms-bronto-workflow 
+    tag: $(appveyor_build_version)
+    release: BrontoWorkflow $(appveyor_build_version)
+    description: 'Alpha release - Only for testing development progress.'
+    auth_token:
+      secure: +WQIHXHxdNFy3CQ2ItEubL7hOFj0triuSW0g6Sim2PZS9vI7iTNbDjpSyZmO2EcU
+    artifact: /.*\.nupkg/, /.*\.zip/         # upload all Zip packages to release assets
+    draft: true
+    prerelease: false
+    on:
+      branch: master
+      #appveyor_repo_tag: true        # deploy on tag push only
 
 notifications:
 - provider: Slack

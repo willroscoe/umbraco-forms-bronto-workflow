@@ -11,8 +11,13 @@ namespace Wr.UmbFormsBrontoWorkflow.BrontoApi
         internal readonly string _sessionId;
         internal readonly sessionHeader _sessionHeader;
 
-        public BrontoSoapClient(string ApiToken)
+        public BrontoSoapClient(string ApiToken = "")
         {
+            if (string.IsNullOrEmpty(ApiToken))
+            {
+                ApiToken = BrontoAppSettings.SoapApiToken;
+            }
+
             _sessionId = Login(ApiToken);
             _sessionHeader = new sessionHeader();
             _sessionHeader.sessionId = _sessionId;
@@ -58,10 +63,24 @@ namespace Wr.UmbFormsBrontoWorkflow.BrontoApi
         }
 
         /// <summary>
+        /// Get all bronto lists as KeyValuePairs
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<string,string>> GetLists_Formatted()
+        {
+            var result = new List<KeyValuePair<string, string>>();
+            foreach (var item in GetListsRaw())
+            {
+                result.Add(new KeyValuePair<string, string>(item.id, item.label)); // id and name of bronto list
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Retrieve all available lists for this account
         /// </summary>
         /// <returns></returns>
-        public List<mailListObject> GetLists()
+        internal List<mailListObject> GetListsRaw()
         {
             using (var client = BrontoSoapClientConstructor.Initialise())
             {
@@ -91,11 +110,26 @@ namespace Wr.UmbFormsBrontoWorkflow.BrontoApi
             }
         }
 
+
+        /// <summary>
+        /// Get all bronto fields as KeyValuePairs
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<string, string>> GetFields_Formatted()
+        {
+            var result = new List<KeyValuePair<string, string>>();
+            foreach (var item in GetFieldsRaw())
+            {
+                result.Add(new KeyValuePair<string, string>(item.id, item.label)); // id and name of bronto list
+            }
+            return result;
+        }
+
         /// <summary>
         /// Retrieve all bronto fields for this account
         /// </summary>
         /// <returns></returns>
-        public List<fieldObject> GetFields()
+        internal List<fieldObject> GetFieldsRaw()
         {
             using (var client = BrontoSoapClientConstructor.Initialise())
             {

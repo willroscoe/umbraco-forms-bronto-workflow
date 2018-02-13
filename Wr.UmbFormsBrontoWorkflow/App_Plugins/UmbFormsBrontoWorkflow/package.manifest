@@ -1,6 +1,6 @@
 ﻿{
     javascript: [
         '~/App_Plugins/UmbFormsBrontoWorkflow/lists.editor.controller.js',
-        '~/App_Plugins/UmbFormsBrontoWorkflow/lists.translator.js'
+        '~/App_Plugins/UmbFormsBrontoWorkflow/lists.editor.resources.js'
     ]    
 }

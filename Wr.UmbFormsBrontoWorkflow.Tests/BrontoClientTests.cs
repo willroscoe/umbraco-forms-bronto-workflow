@@ -41,7 +41,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             var bronto = new BrontoSoapClient(ApiToken);
 
             // Act
-            var result = bronto.GetLists();
+            var result = bronto.GetListsRaw();
 
             // Assert
             Assert.IsNotNull(result);
@@ -62,7 +62,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             var bronto = new BrontoSoapClient(ApiToken);
 
             // Act
-            var result = bronto.GetLists();
+            var result = bronto.GetListsRaw();
 
             foreach (var item in result)
             {
@@ -83,7 +83,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             var bronto = new BrontoSoapClient(ApiToken);
 
             // Act
-            var result = bronto.GetFields();
+            var result = bronto.GetFieldsRaw();
 
             // Assert
             Assert.IsNotNull(result);
@@ -105,7 +105,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             var bronto = new BrontoSoapClient(ApiToken);
 
             // Act
-            var result = bronto.GetFields();
+            var result = bronto.GetFieldsRaw();
 
             foreach (var item in result)
             {
@@ -119,11 +119,11 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             Assert.IsTrue(knownFields.Count == 0);
         }
 
-        [Test]
+        /*[Test]
         public void Fail_Build_In_Development()
         {
             // Assert
             Assert.Fail();
-        }
+        }*/
     }
 }

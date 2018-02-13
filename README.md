@@ -1,4 +1,4 @@
-# Bronto workflow for Umbraco Forms - IN DEVELOPMENT
+## <img height="64" src="assets/bronto-workflow_icon64.png " style="margin-bottom: 5px" align="middle" alt="Bronto workflow" title="Umbraco Phone Manager"> Bronto workflow for Umbraco Forms - IN DEVELOPMENT
 A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto contact and associated list, using the Bronto SOAP Api.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/sbbekv4d73eghk2c?svg=true)](https://ci.appveyor.com/project/willroscoe/umbraco-forms-bronto-workflow)

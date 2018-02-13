@@ -255,7 +255,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\UmbFormsBrontoWorkflow\package.manifest" />
+    <Content Include="App_Plugins\UmbFormsBrontoWorkflow\lists.editor.controller.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\UmbFormsBrontoWorkflow\lists.editor.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\UmbFormsBrontoWorkflow\lists.editor.resources.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\UmbFormsBrontoWorkflow\package.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Connected Services\BrontoSoapService\BrontoSoapApiImplService.wsdl" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -639,6 +650,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\BrontoApiViewController.cs" />
+    <Compile Include="AppConstants.cs" />
     <Compile Include="BrontoApi\BrontoSoapClient.cs" />
     <Compile Include="BrontoAppSettings.cs" />
     <Compile Include="Connected Services\BrontoSoapService\Reference.cs">
@@ -649,7 +662,7 @@
     <Compile Include="Helpers\ParseFormToBronto.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workflows\AddSignupUserWorkflow.cs" />
+    <Compile Include="Workflows\BrontoAddSignupUserWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

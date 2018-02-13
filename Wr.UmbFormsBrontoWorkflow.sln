@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2320841D-8C5A-43B2-8E8E-7884315FA6C3}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -31,6 +32,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "build", "build\", "{6E02CC3
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "50475"
+		SlnRelativePath = "build\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
@@ -52,6 +54,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "assets", "assets\", "{740E5
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "50547"
+		SlnRelativePath = "assets\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Web;
 
 namespace Wr.UmbFormsBrontoWorkflow.Tests
 {
@@ -17,19 +15,17 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
         {
             get
             {
-                const string brontoSoapApiTokenfile = "BrontoSoapTestApiToken.txt";
-
                 if (string.IsNullOrEmpty(_ApiToken))
                 {
                     string fullpath = GetApiTokenFilePath(new string[]
                     {
-                        Path.Combine(Environment.CurrentDirectory, @"Wr.UmbFormsBrontoWorkflow.Tests\" + brontoSoapApiTokenfile), // path to encrypted api token file for CI Appveyor testing
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"Dev\Umb\SafeFolder\" + brontoSoapApiTokenfile) // local path to txt file with a test Soap Api Token. This should be outside of the project root and so not included in source control
+                        Path.Combine(Environment.CurrentDirectory, @"Wr.UmbFormsBrontoWorkflow.Tests\" + AppConstants.SoapApiTokenFilename), // path to encrypted api token file for CI Appveyor testing
+                        AppConstants.SoapApiTokenFileLocalPath // local path to txt file with a test Soap Api Token. This should be outside of the project root and so not included in source control
                     });
 
                     if (string.IsNullOrEmpty(fullpath))
                     {
-                        throw new FileNotFoundException("Could not locate a file with the bronto Api Token", brontoSoapApiTokenfile);
+                        throw new FileNotFoundException("Could not locate a file with the bronto Api Token", AppConstants.SoapApiTokenFilename);
                     }
                     _ApiToken = File.ReadAllText(fullpath);
                 }

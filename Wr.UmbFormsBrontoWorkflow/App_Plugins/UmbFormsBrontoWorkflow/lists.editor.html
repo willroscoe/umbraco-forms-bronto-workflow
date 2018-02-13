@@ -1,0 +1,17 @@
+﻿<div ng-controller="UmbFormsBrontoWorkflow.Lists.Controller">
+    <div ng-class="{'control-group umb-control-group':listId}">
+        <div class="umb-el-wrap">
+            <label class="control-label" for="">
+                List
+                <small class="ng-binding">Save to Bronto List</small>
+            </label>
+            <div class="controls controls-row">
+                <select class="-full-width"
+                        ng-options="list.Key as list.Value for list in lists"
+                        ng-model="listId">
+                    <option value="">Select a list</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
