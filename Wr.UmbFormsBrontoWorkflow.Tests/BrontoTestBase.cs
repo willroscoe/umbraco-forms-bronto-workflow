@@ -23,11 +23,8 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
                 {
                     string fullpath = GetApiTokenFilePath(new string[]
                     {
-                        Path.Combine(VirtualPathUtility.ToAppRelative("~"), brontoSoapApiTokenfile),
-                        Path.Combine(Environment.CurrentDirectory, brontoSoapApiTokenfile),
-                        Path.Combine(Assembly.GetExecutingAssembly().Location, brontoSoapApiTokenfile),
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dev/Umb/SafeFolder/" + brontoSoapApiTokenfile), // local path to txt file with a test Soap Api Token. This should be outside of the project root and so not included in source control
-                        Path.Combine(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()),brontoSoapApiTokenfile)
+                        Path.Combine(Environment.CurrentDirectory, @"Wr.UmbFormsBrontoWorkflow.Tests\" + brontoSoapApiTokenfile), // path to encrypted api token file for CI Appveyor testing
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"Dev\Umb\SafeFolder\" + brontoSoapApiTokenfile) // local path to txt file with a test Soap Api Token. This should be outside of the project root and so not included in source control
                     });
 
                     if (string.IsNullOrEmpty(fullpath))
