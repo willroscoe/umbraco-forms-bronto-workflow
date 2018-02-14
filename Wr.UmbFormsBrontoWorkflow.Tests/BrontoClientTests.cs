@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Wr.UmbFormsBrontoWorkflow.BrontoApi;
+//using Wr.UmbFormsBrontoWorkflow.BrontoApi;
+using Bronto.API;
 
 namespace Wr.UmbFormsBrontoWorkflow.Tests
 {
@@ -27,7 +28,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Tests
             // Arrange
 
             // Act
-            var bronto = new BrontoSoapClient(ApiToken);
+            var bronto = new LoginSession().; //BrontoSoapClient(ApiToken);
 
             // Assert
             Assert.IsNotNull(bronto);

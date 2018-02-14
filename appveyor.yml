@@ -1,4 +1,4 @@
-version: 0.0.1-alpha{build}
+version: 0.0.1.{build}-alpha
 
 image: Visual Studio 2017
 
@@ -13,10 +13,6 @@ skip_tags: true
 
 # Start builds on tags only (GitHub and BitBucket)
 skip_non_tags: false
-
-environment:
-  test_token_secret: # encrypted test bronto api token secret
-    secure: V0qUkR82WOW81seXJ9VCkz63T8x1+WJJgjkpfwdzpT8=
 
 # Ignore testing a commit if only .md files or assets have changed
 # Or if various strings are found in the commit message: updated readme, update readme, update docs, update version, update appveyor
@@ -42,10 +38,6 @@ assembly_info:
 cache:
 - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
 
-install:
-  - nuget install secure-file -ExcludeVersion
-  - secure-file\tools\secure-file -decrypt Wr.UmbFormsBrontoWorkflow.Tests\BrontoSoapTestApiToken.txt.enc -secret %test_token_secret% # decrypt test bronto api token file
-
 before_build:
 - cmd: nuget restore Wr.UmbFormsBrontoWorkflow.sln
 
@@ -57,11 +49,6 @@ build:
 after_build:
 - ps: >-
     build\tools\UmbracoTools\Wr.UmbracoTools.Packager.exe -set build\umbraco\package_settings.json -out "..\brontoworkflow-umbracoforms{version}.zip" -ver ${env:APPVEYOR_BUILD_VERSION}
-
-test:
-  assemblies:
-    only:
-    - Wr.UmbFormsBrontoWorkflow.Tests.dll
 
 artifacts:
 - path: brontoworkflow*.zip

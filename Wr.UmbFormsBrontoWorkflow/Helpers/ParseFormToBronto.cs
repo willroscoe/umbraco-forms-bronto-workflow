@@ -1,18 +1,104 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Bronto.API.BrontoService;
+using Newtonsoft.Json;
+using System;
 using System.Linq;
-using System.Web;
 using Umbraco.Forms.Core;
-using Wr.UmbFormsBrontoWorkflow.BrontoSoapService;
 using Wr.UmbFormsBrontoWorkflow.Models;
 
 namespace Wr.UmbFormsBrontoWorkflow
 {
     public static class ParseFormToBronto
     {
-        public static contactObject Contact(Record record)
+        public static ParseContactResult Contact(Record record, string listAndFieldMapping)
         {
-            return new contactObject();
+            var result = new ParseContactResult();
+
+            var listMapping = JsonConvert.DeserializeObject<ListMappingModel>(listAndFieldMapping);
+
+            // get the list id
+            var listId = listMapping.ListId;
+
+            // build bronto contact
+            var newContact = new contactObject();
+
+            // process standard contact fields
+
+            if (!string.IsNullOrEmpty(listId))
+                newContact.listIds = new string[] { listId };
+
+            var emailAddress = GetMappedFieldAsString(listMapping, record, ContactStandardFieldName.email.ToString());
+            if (!string.IsNullOrEmpty(emailAddress))
+                newContact.email = emailAddress;
+
+            var mobileTel = GetMappedFieldAsString(listMapping, record, ContactStandardFieldName.mobileNumber.ToString());
+            if (!string.IsNullOrEmpty(mobileTel))
+                newContact.mobileNumber = mobileTel;
+
+            // the marketing source of the user - this could be passed from the 'phone manager' package
+            var marketingSource = GetMappedFieldAsString(listMapping, record, ContactStandardFieldName.customSource.ToString());
+            if (!string.IsNullOrEmpty(marketingSource))
+                newContact.customSource = marketingSource;
+
+            // get list of ContactStandardFieldName enum names
+            var standardFields = Enum.GetNames(typeof(ContactStandardFieldName)).ToList();
+
+            // remove standard fields from the remaining mapping data as they are no longer required
+            listMapping.Mappings.RemoveAll(x => standardFields.Contains(x.ListField));
+
+            // Add custom fields
+            var customFields = listMapping.Mappings.Select(m =>
+                {
+                    return new contactField
+                    {
+                        fieldId = m.ListField,
+                        content = GetFieldValue(record, m)
+                    };
+                }).ToArray();
+
+            if (customFields.Count() > 0)
+            {
+                newContact.fields = customFields;
+            }
+
+            // add new contact to result
+            result.contact = newContact;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds and return the string value of the mapped field item
+        /// </summary>
+        /// <param name="listMapping"></param>
+        /// <param name="record"></param>
+        /// <param name="listField"></param>
+        /// <returns></returns>
+        private static string GetMappedFieldAsString(ListMappingModel listMapping, Record record, string listField)
+        {
+            var map = listMapping.Mappings.FirstOrDefault(m => m.ListField == listField);
+            return GetFieldValue(record, map);
+        }
+
+        /// <summary>
+        /// Convert a record item to mapped value
+        /// </summary>
+        /// <param name="record"></param>
+        /// <param name="map"></param>
+        /// <returns></returns>
+        private static string GetFieldValue(Record record, FieldMappingModel map)
+        {
+            if (map == null)
+            {
+                return string.Empty;
+            }
+            var value = map.StaticValue;
+            Guid fieldGuid;
+            if (Guid.TryParse(map.Field, out fieldGuid))
+            {
+                var field = record.GetRecordField(fieldGuid);
+                value = field.ValuesAsString();
+            }
+            return value;
         }
     }
 }

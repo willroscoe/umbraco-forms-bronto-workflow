@@ -7,7 +7,7 @@ namespace Wr.UmbFormsBrontoWorkflow
     internal static class BrontoAppSettings
     {
         /// <summary>
-        /// Get the Soap Api Token. When running locally the Api token will be retrieved from a local file 
+        /// Get the Soap Api Token.
         /// </summary>
         public static string SoapApiToken { get { return GetConfigSetting(AppConstants.AppSetting_BrontoSoapApiTokenKey); } }
 
@@ -19,14 +19,6 @@ namespace Wr.UmbFormsBrontoWorkflow
         private static string GetConfigSetting(string settingName)
         {
             var setting = ConfigurationManager.AppSettings[settingName];
-
-            if (string.IsNullOrEmpty(setting) && settingName == AppConstants.AppSetting_BrontoSoapApiTokenKey)
-            {
-                if (File.Exists(AppConstants.SoapApiTokenFileLocalPath))
-                {
-                    setting = File.ReadAllText(AppConstants.SoapApiTokenFileLocalPath);
-                }
-            }
 
             return setting ?? string.Empty;
         }

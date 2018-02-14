@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
+using Wr.UmbFormsBrontoWorkflow.Models;
 
 namespace Wr.UmbFormsBrontoWorkflow
 {
@@ -11,13 +11,14 @@ namespace Wr.UmbFormsBrontoWorkflow
         public static string AppSetting_BrontoSoapApiTokenKey = "umbFormsBrontoSoapApiToken";
 
         /// <summary>
-        /// The filename of the local Soap Api token file. On the live system the Api token will be retrieved from the app setting section of the web.config
+        /// Standard Bronto contact fields which might be applicable to the workflow
         /// </summary>
-        public static string SoapApiTokenFilename = "BrontoSoapTestApiToken.txt";
-
-        /// <summary>
-        /// The path to the local copy of the Soap Api token file. Used for testing the Bronto API locally without having to commit the Api token to source control
-        /// </summary>
-        public static string SoapApiTokenFileLocalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"Dev\Umb\SafeFolder\" + SoapApiTokenFilename);
+        public static List<ContactStandardField> BrontoContactsStandardFields =
+            new List<ContactStandardField>()
+            {
+                new ContactStandardField() { FieldName = ContactStandardFieldName.email, FriendlyName="Email", Tooltip="The user's email address" },
+                new ContactStandardField() { FieldName = ContactStandardFieldName.mobileNumber, FriendlyName="Mobile Tel", Tooltip="The user's mobile telephone number" },
+                new ContactStandardField() { FieldName = ContactStandardFieldName.customSource, FriendlyName="Marketing Source", Tooltip="The marketing source of the user" }
+            };
     }
 }
