@@ -41,9 +41,9 @@ namespace Wr.UmbFormsBrontoWorkflow.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<ContactStandardField> GetStandardFields()
+        public IEnumerable<FieldMappingModel> GetDefaultFields()
         {
-            return AppConstants.BrontoContactsStandardFields;
+            return AppConstants.BrontoContactsDefaultFields;
         }
     }
 }

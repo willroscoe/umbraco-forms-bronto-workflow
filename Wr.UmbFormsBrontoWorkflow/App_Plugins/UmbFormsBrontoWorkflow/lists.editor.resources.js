@@ -9,8 +9,8 @@
         getFields: function () {
             return umbRequestHelper.resourcePromise($http.get(apiPath + 'GetFields'), 'No Bronto custom fields returned');
         },
-        getStandardFields: function () {
-            return umbRequestHelper.resourcePromise($http.get(apiPath + 'GetStandardFields'), 'No Bronto standard fields returned');
+        getDefaultFields: function () {
+            return umbRequestHelper.resourcePromise($http.get(apiPath + 'GetDefaultFields'), 'No Bronto default fields returned');
         }
     };
 });

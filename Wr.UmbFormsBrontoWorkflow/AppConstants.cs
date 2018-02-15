@@ -13,12 +13,12 @@ namespace Wr.UmbFormsBrontoWorkflow
         /// <summary>
         /// Standard Bronto contact fields which might be applicable to the workflow
         /// </summary>
-        public static List<ContactStandardField> BrontoContactsStandardFields =
-            new List<ContactStandardField>()
+        public static List<FieldMappingModel> BrontoContactsDefaultFields =
+            new List<FieldMappingModel>()
             {
-                new ContactStandardField() { FieldName = ContactStandardFieldName.email, FriendlyName="Email", Tooltip="The user's email address" },
-                new ContactStandardField() { FieldName = ContactStandardFieldName.mobileNumber, FriendlyName="Mobile Tel", Tooltip="The user's mobile telephone number" },
-                new ContactStandardField() { FieldName = ContactStandardFieldName.customSource, FriendlyName="Marketing Source", Tooltip="The marketing source of the user" }
+                new FieldMappingModel() { BrontoFieldId = ContactDefaultFieldName.email.ToString(), BrontoFieldFriendlyName="Email", Tooltip="The user's email address" },
+                new FieldMappingModel() { BrontoFieldId = ContactDefaultFieldName.mobileNumber.ToString(), BrontoFieldFriendlyName="Mobile Tel", Tooltip="The user's mobile telephone number" },
+                new FieldMappingModel() { BrontoFieldId = ContactDefaultFieldName.customSource.ToString(), BrontoFieldFriendlyName="Marketing Source", Tooltip="The marketing source of the user" }
             };
     }
 }

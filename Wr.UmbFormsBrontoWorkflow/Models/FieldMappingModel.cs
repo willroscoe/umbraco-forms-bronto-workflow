@@ -5,10 +5,14 @@
     /// </summary>
     public class FieldMappingModel
     {
-        public string ListField { get; set; }
+        public string BrontoFieldId { get; set; }
 
-        public string Field { get; set; }
+        public string BrontoFieldFriendlyName { get; set; }
+
+        public string FormField { get; set; }
 
         public string StaticValue { get; set; }
+
+        public string Tooltip { get; set; }
     }
 }

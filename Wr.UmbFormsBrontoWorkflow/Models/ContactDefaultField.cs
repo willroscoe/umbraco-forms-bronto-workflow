@@ -3,19 +3,20 @@
     /// <summary>
     /// Useful standard contact field names, as enums
     /// </summary>
-    public enum ContactStandardFieldName
+    public enum ContactDefaultFieldName
     {
+        na,
         email,
         mobileNumber,
         customSource
     }
 
-    public class ContactStandardField
+    public class ContactDefaultField
     {
         /// <summary>
         /// The field name used by Bronto
         /// </summary>
-        public ContactStandardFieldName FieldName { get; set; }
+        public ContactDefaultFieldName FieldName { get; set; }
 
         /// <summary>
         /// The name to display to user

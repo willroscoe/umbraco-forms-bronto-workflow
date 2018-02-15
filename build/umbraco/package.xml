@@ -26,6 +26,11 @@
       <orgPath>/bin</orgPath>
       <orgName>Wr.UmbFormsBrontoWorkflow.dll</orgName>
     </file>
+    <file>
+      <guid>Bronto.API.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Bronto.API.dll</orgName>
+    </file>
   </files>
   <info>
     <package>

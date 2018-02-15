@@ -26,31 +26,31 @@ namespace Wr.UmbFormsBrontoWorkflow
             if (!string.IsNullOrEmpty(listId))
                 newContact.listIds = new string[] { listId };
 
-            var emailAddress = GetMappedFieldAsString(listMapping, record, ContactStandardFieldName.email.ToString());
+            var emailAddress = GetMappedFieldAsString(listMapping, record, ContactDefaultFieldName.email.ToString());
             if (!string.IsNullOrEmpty(emailAddress))
                 newContact.email = emailAddress;
 
-            var mobileTel = GetMappedFieldAsString(listMapping, record, ContactStandardFieldName.mobileNumber.ToString());
+            var mobileTel = GetMappedFieldAsString(listMapping, record, ContactDefaultFieldName.mobileNumber.ToString());
             if (!string.IsNullOrEmpty(mobileTel))
                 newContact.mobileNumber = mobileTel;
 
             // the marketing source of the user - this could be passed from the 'phone manager' package
-            var marketingSource = GetMappedFieldAsString(listMapping, record, ContactStandardFieldName.customSource.ToString());
+            var marketingSource = GetMappedFieldAsString(listMapping, record, ContactDefaultFieldName.customSource.ToString());
             if (!string.IsNullOrEmpty(marketingSource))
                 newContact.customSource = marketingSource;
 
             // get list of ContactStandardFieldName enum names
-            var standardFields = Enum.GetNames(typeof(ContactStandardFieldName)).ToList();
+            var standardFields = Enum.GetNames(typeof(ContactDefaultFieldName)).ToList();
 
             // remove standard fields from the remaining mapping data as they are no longer required
-            listMapping.Mappings.RemoveAll(x => standardFields.Contains(x.ListField));
+            listMapping.Mappings.RemoveAll(x => standardFields.Contains(x.BrontoFieldId));
 
             // Add custom fields
             var customFields = listMapping.Mappings.Select(m =>
                 {
                     return new contactField
                     {
-                        fieldId = m.ListField,
+                        fieldId = m.BrontoFieldId,
                         content = GetFieldValue(record, m)
                     };
                 }).ToArray();
@@ -75,7 +75,7 @@ namespace Wr.UmbFormsBrontoWorkflow
         /// <returns></returns>
         private static string GetMappedFieldAsString(ListMappingModel listMapping, Record record, string listField)
         {
-            var map = listMapping.Mappings.FirstOrDefault(m => m.ListField == listField);
+            var map = listMapping.Mappings.FirstOrDefault(m => m.BrontoFieldId == listField);
             return GetFieldValue(record, map);
         }
 
@@ -93,7 +93,7 @@ namespace Wr.UmbFormsBrontoWorkflow
             }
             var value = map.StaticValue;
             Guid fieldGuid;
-            if (Guid.TryParse(map.Field, out fieldGuid))
+            if (Guid.TryParse(map.BrontoFieldId, out fieldGuid))
             {
                 var field = record.GetRecordField(fieldGuid);
                 value = field.ValuesAsString();
