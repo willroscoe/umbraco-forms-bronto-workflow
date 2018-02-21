@@ -3,12 +3,13 @@ A custom Umbraco Forms workflow to allow users to save a new marketing contact t
 
 [![Build status](https://ci.appveyor.com/api/projects/status/sbbekv4d73eghk2c?svg=true)](https://ci.appveyor.com/project/willroscoe/umbraco-forms-bronto-workflow)
 
+## Workflow screengrab
 
 ![Bronto workflow](/assets/bronto_screengrab.jpg?raw=true "Bronto workflow")
 
 ## Web.config Configuration:
 
-In the <appSettings> section:
+In the 'appSettings' section:
 ```
 <add key="umbFormsBrontoSoapApiToken" value="{Your Bronto A/c Soap API Token}"/>
 <add key="umbFormsBrontoRestrictToListIds" value="{comma delimited list of bronto list id's or list names you want to restrict selection of. If empty, all available lists will be available }"/>  - OPTIONAL
