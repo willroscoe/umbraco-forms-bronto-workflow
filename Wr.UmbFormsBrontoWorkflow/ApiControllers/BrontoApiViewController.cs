@@ -1,5 +1,4 @@
 ﻿using Bronto.API;
-using Bronto.API.BrontoService;
 using System.Collections.Generic;
 using System.Web.Http;
 using Umbraco.Web.WebApi;
@@ -15,12 +14,42 @@ namespace Wr.UmbFormsBrontoWorkflow.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<mailListObject> GetLists()
+        public IEnumerable<ListMappingModel> GetBrontoLists()
         {
+            var results = new List<ListMappingModel>();
+
             var login = LoginSession.Create(BrontoAppSettings.SoapApiToken);
             var mailListsApi = new MailLists(login);
             var allLists = mailListsApi.Read();
-            return allLists;
+
+            if (allLists.Count > 0)
+            {
+                var restrictToLists = BrontoAppSettings.RestrictToListIds;
+
+                // map bronto fields to ListMappingModel
+                foreach (var item in allLists)
+                {
+                    bool OkToUse = true;
+                    if (restrictToLists.Count > 0) // there are restrictToLists added to web.config app settings
+                    {
+                        if (!restrictToLists.Contains(item.id) && !restrictToLists.Contains(item.name)) // this list is not in the RestrictToListIds list
+                        {
+                            OkToUse = false;
+                        }
+                    }
+                    if (OkToUse)
+                    {
+                        results.Add(
+                            new ListMappingModel()
+                            {
+                                listId = item.id,
+                                listLabel = item.label
+                            });
+                    }
+                }
+            }
+            
+            return results;
         }
 
         /// <summary>
@@ -28,22 +57,44 @@ namespace Wr.UmbFormsBrontoWorkflow.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<fieldObject> GetFields()
+        public IEnumerable<FieldMappingModel> GetBrontoFields()
         {
+            var results = new List<FieldMappingModel>();
+            results.AddRange(AppConstants.BrontoContactsDefaultFields);
+
+            // get bronto custom fields
             var login = LoginSession.Create(BrontoAppSettings.SoapApiToken);
             var contactsApi = new Contacts(login);
             var allFields = contactsApi.Fields;
-            return allFields;
-        }
 
-        /// <summary>
-        /// Returns the 'useful' standard bronto contact fields.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IEnumerable<FieldMappingModel> GetDefaultFields()
-        {
-            return AppConstants.BrontoContactsDefaultFields;
+            if (allFields.Count > 0)
+            {
+                var restrictToFields = BrontoAppSettings.RestrictToFieldIds;
+
+                // map bronto fields to FieldMappingModel
+                foreach (var item in allFields)
+                {
+                    bool OkToUse = true;
+                    if (restrictToFields.Count > 0) // there are restrictToLists added to web.config app settings
+                    {
+                        if (!restrictToFields.Contains(item.id) && !restrictToFields.Contains(item.name)) // this list is not in the RestrictToListIds list
+                        {
+                            OkToUse = false;
+                        }
+                    }
+                    if (OkToUse)
+                    {
+                        results.Add(
+                        new FieldMappingModel()
+                        {
+                            brontoFieldId = item.id,
+                            brontoFieldLabel = item.label
+                        });
+                    }
+                }
+            }
+
+            return results;
         }
     }
 }

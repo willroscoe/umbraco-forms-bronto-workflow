@@ -5,14 +5,29 @@
     /// </summary>
     public class FieldMappingModel
     {
-        public string BrontoFieldId { get; set; }
+        /// <summary>
+        /// The id of the bronto field
+        /// </summary>
+        public string brontoFieldId { get; set; }
 
-        public string BrontoFieldFriendlyName { get; set; }
+        /// <summary>
+        /// The label of the bronto field
+        /// </summary>
+        public string brontoFieldLabel { get; set; }
 
-        public string FormField { get; set; }
+        /// <summary>
+        /// The umbaco form field
+        /// </summary>
+        public string formField { get; set; }
 
-        public string StaticValue { get; set; }
+        /// <summary>
+        /// Holder of a static value, as opposed to a vaule from the umbraco form
+        /// </summary>
+        public string staticValue { get; set; }
 
-        public string Tooltip { get; set; }
+        /// <summary>
+        /// Sets whether the field is required by bronto. This is not currently implemented 100% as bronto requires either one of either 'email' or 'mobileNumber'.
+        /// </summary>
+        public bool isRequired { get; set; }
     }
 }

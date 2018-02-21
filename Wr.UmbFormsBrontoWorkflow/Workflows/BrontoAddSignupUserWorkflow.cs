@@ -1,5 +1,4 @@
 ﻿using Bronto.API;
-using Bronto.API.BrontoService;
 using System;
 using System.Collections.Generic;
 using Umbraco.Forms.Core;
@@ -8,6 +7,9 @@ using Umbraco.Forms.Core.Enums;
 
 namespace Wr.UmbFormsBrontoWorkflow.Workflows
 {
+    /// <summary>
+    /// An Umbraco Forms workflow to add a contact to the Bronto marketing system, using the Bronto SOAP API
+    /// </summary>
     public class BrontoAddSignupUserWorkflow : WorkflowType
     {
         public BrontoAddSignupUserWorkflow()
@@ -32,7 +34,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Workflows
 
                 var parseResult = ParseFormToBronto.Contact(record, ListAndFieldMapping);
 
-                if (!parseResult.hasError)
+                if (parseResult.IsValid()) // i.e. the required bronto contact fields are present
                 {
                     // bronto login
                     var login = LoginSession.Create(BrontoAppSettings.SoapApiToken);
@@ -47,17 +49,17 @@ namespace Wr.UmbFormsBrontoWorkflow.Workflows
                         }
                         else
                         {
-                            Umbraco.Core.Logging.LogHelper.Error<BrontoAddSignupUserWorkflow>("Error in Bronto Workflow", new Exception(string.Format("Add Contact: Error: {0} for user: {1} {2}", result.Items[0].ErrorString, parseResult.contact.email, parseResult.contact.mobileNumber)));
+                            Umbraco.Core.Logging.LogHelper.Error<BrontoAddSignupUserWorkflow>("Error in Bronto Workflow", new Exception(string.Format("Add Contact: Error: {0} for contact: {1}", result.Items[0].ErrorString, parseResult.ContactToString())));
                         }
                     }
                     else
                     {
-                        Umbraco.Core.Logging.LogHelper.Error<BrontoAddSignupUserWorkflow>("Error in Bronto Workflow", new Exception(string.Format("Add Contact: No items in response: {0} {1}", parseResult.contact.email, parseResult.contact.mobileNumber)));
+                        Umbraco.Core.Logging.LogHelper.Error<BrontoAddSignupUserWorkflow>("Error in Bronto Workflow", new Exception(string.Format("Add Contact: No items in response: {0}", parseResult.ContactToString())));
                     }
                 }
                 else
                 {
-                    Umbraco.Core.Logging.LogHelper.Error<BrontoAddSignupUserWorkflow>("Error in Bronto Workflow", new Exception(string.Format("Parse Contact Error: {0} {1}", parseResult.contact.email, parseResult.contact.mobileNumber)));
+                    Umbraco.Core.Logging.LogHelper.Error<BrontoAddSignupUserWorkflow>("Error in Bronto Workflow", new Exception(string.Format("Parse Contact Error: {0}", parseResult.ContactToString())));
                 }
 
             }
@@ -72,7 +74,7 @@ namespace Wr.UmbFormsBrontoWorkflow.Workflows
         /// <summary>
         /// Validate the workflow settings
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<Exception></returns>
         public override List<Exception> ValidateSettings()
         {
             List<Exception> exceptionList = new List<Exception>();
@@ -80,10 +82,14 @@ namespace Wr.UmbFormsBrontoWorkflow.Workflows
             if (string.IsNullOrEmpty(BrontoAppSettings.SoapApiToken))
                 exceptionList.Add(new Exception("The Bronto Soap Api Token is missing from the app settings section of the web.config"));
 
-
-            if (string.IsNullOrEmpty(ListAndFieldMapping))
+            // Check if a bronto list has been selected
+            if (!ParseFormToBronto.CheckSettings_HasListSelected(ListAndFieldMapping))
                 exceptionList.Add(new Exception("A Bronto list must be selected."));
-            
+
+            // Check if the required fields for a bronto contact have been set
+            if (!ParseFormToBronto.CheckSettings_HasRequiredFields(ListAndFieldMapping))
+                exceptionList.Add(new Exception("Required bronto fields missing. Either 'Email' or 'Mobile Tel' must be set."));
+
             return exceptionList;
         }
     }

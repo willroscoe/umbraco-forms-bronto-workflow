@@ -11,14 +11,24 @@ namespace Wr.UmbFormsBrontoWorkflow
         public static string AppSetting_BrontoSoapApiTokenKey = "umbFormsBrontoSoapApiToken";
 
         /// <summary>
+        /// Only allow these lists to be selected
+        /// </summary>
+        public static string AppSetting_RestrictToListIds = "umbFormsBrontoRestrictToListIds";
+
+        /// <summary>
+        /// Only allow these fields to be selected
+        /// </summary>
+        public static string AppSetting_RestrictToFieldIds = "umbFormsBrontoRestrictToFieldIds";
+
+        /// <summary>
         /// Standard Bronto contact fields which might be applicable to the workflow
         /// </summary>
         public static List<FieldMappingModel> BrontoContactsDefaultFields =
             new List<FieldMappingModel>()
             {
-                new FieldMappingModel() { BrontoFieldId = ContactDefaultFieldName.email.ToString(), BrontoFieldFriendlyName="Email", Tooltip="The user's email address" },
-                new FieldMappingModel() { BrontoFieldId = ContactDefaultFieldName.mobileNumber.ToString(), BrontoFieldFriendlyName="Mobile Tel", Tooltip="The user's mobile telephone number" },
-                new FieldMappingModel() { BrontoFieldId = ContactDefaultFieldName.customSource.ToString(), BrontoFieldFriendlyName="Marketing Source", Tooltip="The marketing source of the user" }
+                new FieldMappingModel() { brontoFieldId = ContactDefaultFieldName.email.ToString(), brontoFieldLabel="Email", isRequired=true },
+                new FieldMappingModel() { brontoFieldId = ContactDefaultFieldName.mobileNumber.ToString(), brontoFieldLabel="Mobile Tel", isRequired=true },
+                new FieldMappingModel() { brontoFieldId = ContactDefaultFieldName.customSource.ToString(), brontoFieldLabel="Marketing Source" }
             };
     }
 }

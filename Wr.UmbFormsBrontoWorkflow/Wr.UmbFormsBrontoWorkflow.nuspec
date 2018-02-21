@@ -16,4 +16,7 @@
       <dependency id="UmbracoForms.Core" version="6.0.6" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="bin\Bronto.API.dll" target="lib\net451" />
+  </files>
 </package>

@@ -52,6 +52,7 @@
     </Reference>
     <Reference Include="Bronto.API">
       <HintPath>..\..\..\..\GitHub\BrontoSharp\Bronto.API\bin\Release\Bronto.API.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="businesslogic, Version=1.0.6331.7969, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.6.0\lib\net45\businesslogic.dll</HintPath>
@@ -287,10 +288,11 @@
     <Compile Include="AppConstants.cs" />
     <Compile Include="BrontoAppSettings.cs" />
     <Compile Include="Helpers\ParseFormToBronto.cs" />
-    <Compile Include="Models\ContactDefaultField.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\ListMappingModel.cs" />
     <Compile Include="Models\ParseContactResult.cs" />
     <Compile Include="Models\FieldMappingModel.cs" />
-    <Compile Include="Models\ListMappingModel.cs" />
+    <Compile Include="Models\SettingValueModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workflows\BrontoAddSignupUserWorkflow.cs" />
   </ItemGroup>

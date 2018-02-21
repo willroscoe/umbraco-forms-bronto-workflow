@@ -1,16 +1,16 @@
 ﻿angular.module("umbraco")
     .controller("UmbFormsBrontoWorkflow.Lists.Controller",
-    function ($scope, $http, pickerResource, UmbFormsBrontoWorkflowResource) {
+    function ($scope, $http, $routeParams, pickerResource, UmbFormsBrontoWorkflowResource) {
         "use strict";
 
-        var defaultMappings = [];
-        UmbFormsBrontoWorkflowResource.getDefaultFields().then(function (response) {
-            defaultMappings = response;
+        // the rest are added as custom fields, which are used across all bronto lists for an a/c
+        UmbFormsBrontoWorkflowResource.getBrontoFields().then(function (response) { // all lists share the same custom fields in Bronto
+            $scope.listFields = response;
         });
 
-        var allFields = [];
-        UmbFormsBrontoWorkflowResource.getFields().then(function (response) { // all lists share the same custom fields in Bronto
-            allFields = response;
+        // get all the bronto lists
+        UmbFormsBrontoWorkflowResource.getBrontoLists().then(function (response) {
+            $scope.lists = response;
         });
 
         function save() {
@@ -23,68 +23,34 @@
         function init() {
 
             if (!$scope.setting.value) {
-                $scope.mappings = defaultMappings;
-                $scope.lists = [];
+                $scope.mappings = [];
                 $scope.setting.value = {
                     mappings: $scope.mappings,
                     listId: null
                 }
             } else {
                 var value = JSON.parse($scope.setting.value);
-                value.mappings.forEach(function (mapping) {
-                    if (!$scope.isReservedFieldName(mapping.brontoFieldId) || mapping.toolTip) {
-                        return;
-                    }
-
-                    var defaultMap = defaultMappings.filter(function (d) {
-                        return d.brontoFieldId === mapping.brontoFieldId;
-                    });
-
-                    if (defaultMap.length > 0 && defaultMap[0].toolTip) {
-                        mapping.toolTip = defaultMap[0].toolTip;
-                    }
-                });
-
                 $scope.listId = value.listId;
                 $scope.mappings = value.mappings;
-
-                if ($scope.listId != null) {
-                    $scope.changeList();
-                }
             }
 
-            UmbFormsBrontoWorkflowResource.getLists().then(function (response) {
-                $scope.lists = response;
-                if ($scope.listId) {
-                    $scope.changeList();
-                }
-            });
+            // get the umbraco form id
+            var formId = $routeParams.id;
+            if (formId === -1 && $scope.model && $scope.model.fields) {
 
-            pickerResource.getFields().then(function (response) {
-                $scope.fields = response.data;
-            });
+            } else {
+                // get the umbraco form fields setup for the form linked to this instance of the workflow
+                pickerResource.getAllFields($routeParams.id).then(function (response) {
+                    $scope.fields = response.data;
+                });
+            }
         }
 
-        $scope.mouseOver = function ($event, tip) {
-            $scope.tooltip = {
-                show: true,
-                event: $event,
-                content: tip
-            };
-        }
-
-        $scope.mouseLeave = function () {
-            $scope.tooltip = {
-                show: false,
-                event: null,
-                content: null
-
-            };
-        }
-
-        $scope.isReservedFieldName = function (fieldName) {
-            for (var i = 0; i < defaultMappings.length; i++) {
-                if (defaultMappings[i].brontoFieldId == fieldName) {
+        // check if the required fields have been set. The requirement for bronto contacts is that either 'email' or 'mobileNumber' is set.
+        $scope.isValidForBronto = function () {
+            for (var i = 0; i < $scope.mappings.length; i++) {
+                var obj = $scope.mappings[i];
+                if (obj.brontoFieldId == "email" || obj.brontoFieldId == "mobileNumber") {
                     return true;
                 }
             }
@@ -92,20 +58,13 @@
         };
 
         $scope.changeList = function () {
-            if ($scope.listId == null) {
-                $scope.mappings = defaultMappings;
-                save();
-                return;
-            }
             save();
-
-            $scope.listFields = allFields; // all lists share the same custom fields in Bronto
         };
 
         $scope.addMapping = function () {
             $scope.mappings.push({
                 brontoFieldId: "",
-                brontoFieldFriendlyName: "",
+                brontoFieldLabel: "",
                 formField: "",
                 staticValue: ""
             });
