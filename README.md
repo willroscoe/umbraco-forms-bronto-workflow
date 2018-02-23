@@ -1,5 +1,7 @@
 ## <img height="64" src="assets/bronto-workflow_icon64.png " style="margin-bottom: 5px" align="middle" alt="Bronto workflow" title="Umbraco Phone Manager"> Bronto workflow for Umbraco Forms
 [![Build status](https://ci.appveyor.com/api/projects/status/sbbekv4d73eghk2c?svg=true)](https://ci.appveyor.com/project/willroscoe/umbraco-forms-bronto-workflow)
+[![NuGet release](https://img.shields.io/nuget/v/UmbracoFormsBrontoWorkflow.svg)](https://www.nuget.org/packages/UmbracoFormsBrontoWorkflow)
+ [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.org/projects/backoffice-extensions/bronto-workflow-for-umbraco-forms/)
 
 A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto (https://bronto.com) contact and associated list, using the Bronto SOAP Api. The workflow allows mapping between Bronto fields and the Umbraco form fields. The 'Static value' input allows a value to be preset.
 
