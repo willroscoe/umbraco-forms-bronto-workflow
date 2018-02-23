@@ -48,7 +48,7 @@ build:
 
 after_build:
 - ps: >-
-    build\tools\UmbracoTools\Wr.UmbracoTools.Packager.exe -set build\umbraco\package_settings.json -out "..\brontoworkflow-umbracoforms{version}.zip" -ver ${env:APPVEYOR_BUILD_VERSION}
+    build\tools\UmbracoTools\Wr.UmbracoTools.Packager.exe -set build\umbraco\package_settings.json -out "..\brontoworkflow-umbracoforms-{version}.zip" -ver ${env:APPVEYOR_BUILD_VERSION}
 
 artifacts:
 - path: brontoworkflow*.zip

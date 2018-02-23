@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/willroscoe/umbraco-forms-bronto-workflow</projectUrl>
     <iconUrl>https://github.com/willroscoe/umbraco-forms-bronto-workflow/raw/master/assets/bronto-workflow_icon64.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto contact and associated list, using the Bronto SOAP Api.</description>
+    <description>A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto (https://bronto.com) contact and associated list, using the Bronto SOAP Api. The workflow allows mapping between Bronto fields and the Umbraco form fields.</description>
     <tags>Umbraco Forms Bronto Workflow</tags>
     <dependencies>
       <dependency id="UmbracoForms.Core" version="6.0.6" />

@@ -50,7 +50,7 @@
       <website>https://github.com/willroscoe/umbraco-forms-bronto-workflow</website>
     </author>
     <readme>
-      <![CDATA[A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto contact and associated list, using the Bronto SOAP Api.]]>
+      <![CDATA[A custom Umbraco Forms workflow to allow users to save a new marketing contact to a Bronto (https://bronto.com) contact and associated list, using the Bronto SOAP Api. The workflow allows mapping between Bronto fields and the Umbraco form fields.]]>
     </readme>
   </info>
   <DocumentTypes />
