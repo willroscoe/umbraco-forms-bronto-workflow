@@ -40,6 +40,7 @@ You can view/add a SOAP Api Token in your Bronto a/c -> Select (sub) a/c -> Home
 
 ## Dependencies
 Umbraco Forms >= 6.0.6
+
 .Net Framework >= 4.5.1
 
 This project makes use of the Bronto.API class https://github.com/willroscoe/BrontoSharp  
